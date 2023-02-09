@@ -6,5 +6,5 @@ When you have installed both, run the install.bat file. This will install the re
 After that, you can run the bot by running the start.bat file.\
 First, make sure to enter your token in the config.json file. Look it up if you don't know where to get it.\
 Then, you can run the bot by running the start.bat file.\
-To start counting automatically, type $botstart followed by the channel id of the counting channel.\
-To stop counting automatically, type $botstop.
+To start counting automatically, type $botstart followed by the channel id of the counting channel, in the counting channel.\
+To stop counting automatically, type $botstop in the counting channel.
