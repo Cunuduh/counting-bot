@@ -11,7 +11,7 @@ module.exports = {
                 const previousMessageNumber = previousMessage.last().content
                 const newMessageNumber = parseInt(previousMessageNumber) + 1
                 await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 250)))
-                await newMessage.channel.send(newMessageNumber)
+                if (!isNaN(newMessageNumber)) await newMessage.channel.send(newMessageNumber)
             }
             await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 250)))
         })
