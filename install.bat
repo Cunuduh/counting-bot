@@ -8,23 +8,11 @@ echo (you must have nodejs installed - https://nodejs.org/en/)
 echo installation wont work without it
 pause
 call npm i discord.js@11
+:: replace line 80 (blank) of ClientDataManager.js in node_modules\discord.js\src\client\ClientDataManager.js with this line
+:: if (channel)
+:: this is to fix a bug with discord.js
+powershell -Command "$file_content = gc -Path 'node_modules\discord.js\src\client\ClientDataManager.js'; $file_content[79] = $file_content[79] -replace $file_content[79], '        if (channel)'; $file_content | sc -Path 'node_modules\discord.js\src\client\ClientDataManager.js'"
 echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo installation complete, you must still enter your token into
 echo the config.json file
-:: replace "guild.channels.set(channel.id, channel);"" in ClientDataManager.js in the node_modules folder with the text "if (channel) guild.channels.set(channel.id, channel);"
-:: this is a fix for a bug in discord.js
-setlocal EnableDelayedExpansion
-findstr /s /m /i /c:"guild.channels.set(channel.id, channel);" node_modules\discord.js\src\client\ClientDataManager.js >nul
-:: if the string is found, replace it with the new string
-if errorlevel 1 (
-    echo "guild.channels.set(channel.id, channel);" not found in ClientDataManager.js, skipping replacement
-) else (
-    echo "guild.channels.set(channel.id, channel);" found in ClientDataManager.js, replacing...
-    for /f "delims=" %%a in ('findstr /s /m /i /c:"guild.channels.set(channel.id, channel);" node_modules\discord.js\src\client\ClientDataManager.js') do (
-        set "line=%%a"
-        set "line=!line:guild.channels.set(channel.id, channel);=if (channel) guild.channels.set(channel.id, channel);!"
-        echo !line! > node_modules\discord.js\src\client\ClientDataManager.js
-    )
-)
-
 pause
