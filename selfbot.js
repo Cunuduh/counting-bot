@@ -33,7 +33,7 @@ client.on("message", async message => {
     args = args.filter(arg => !isNaN(arg))
     if (cmd === "botstop") {
         await message.delete()
-        console.log("stopped counting")
+        console.log("stopping bot")
         await client.destroy()
         process.exit()
         return
