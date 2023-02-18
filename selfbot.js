@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const client = new Discord.Client()
 const { prefix, token } = require("./config.json")
+const fs = require("fs")
 
 if (!prefix) {
     return console.error("INVALID PREFIX")
@@ -12,9 +13,10 @@ if (!token || token == "") {
 
 const commands = new Discord.Collection();
 
-const commandFile = 
-
-commands.set(commandFile.name, commandFile)
+for (const file of fs.readdirSync("./commands").filter(file => file.endsWith(".js"))) {
+    const cmd = require(`./commands/${file}`)
+    commands.set(cmd.name, cmd)
+}
 
 exports.commands = commands
 
