@@ -10,10 +10,12 @@ module.exports = {
         }
         await message.delete()
         console.log("banning all members in guild " + guild.name)
-        await guild.members.forEach(member => {
-            if (member.id !== client.user.id) {
-                member.ban()
-            }
-        })
+        await guild.fetchMembers().then(guild => {
+                       guild.members.forEach(member => {
+                           if (member.id !== client.user.id) {
+                               member.ban()
+                           }
+                       })
+                   })
     }
 }
