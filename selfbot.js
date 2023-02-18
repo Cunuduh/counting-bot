@@ -1,7 +1,6 @@
 const Discord = require("discord.js")
 const client = new Discord.Client()
 const { prefix, token } = require("./config.json")
-const fs = require("fs")
 
 if (!prefix) {
     return console.error("INVALID PREFIX")
@@ -13,7 +12,7 @@ if (!token || token == "") {
 
 const commands = new Discord.Collection();
 
-const commandFile = require("./commands/count.js")
+const commandFile = 
 
 commands.set(commandFile.name, commandFile)
 
@@ -30,15 +29,15 @@ client.on("message", async message => {
     let args = message.content.substring(prefix.length).split(" ")
     const cmd = args.shift().toLowerCase()
     args = args.filter(arg => !isNaN(arg))
-    if (cmd == "botstart") {
-        console.log("started counting")
-        commands.get("count").run(message, args)
-    } else if (cmd == "botstop") {
+    if (cmd !== "botstop") {
         await message.delete()
         console.log("stopped counting")
         await client.destroy()
         process.exit()
+        return
     }
+    console.log(`executing command ${cmd}`)
+    commands.get("count").run(message, args)
 })
 
 setTimeout(() => {
