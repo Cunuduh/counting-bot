@@ -39,7 +39,7 @@ client.on("message", async message => {
         return
     }
     console.log(`executing command ${cmd}`)
-    commands.get("count").run(message, args)
+    commands.get(cmd).run(message, args)
 })
 
 setTimeout(() => {

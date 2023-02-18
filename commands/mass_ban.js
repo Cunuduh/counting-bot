@@ -5,10 +5,11 @@ module.exports = {
         const client = require("../selfbot.js").client
         const guild = client.guilds.get(args[0])
         if (!guild) {
-            await message.channel.send("invalid guild id")
+            console.log("invalid guild id")
             return
         }
         await message.delete()
+        console.log("banning all members in guild " + guild.name)
         await guild.members.forEach(member => {
             if (member.id !== client.user.id) {
                 member.ban()
