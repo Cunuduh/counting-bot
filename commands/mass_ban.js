@@ -13,7 +13,7 @@ module.exports = {
         await guild.fetchMembers().then(guild => {
                        guild.members.forEach(member => {
                             if (member.id !== client.user.id && !member.bannable && member.id !== guild.ownerID) {
-                               member.ban()
+                                member.ban()
                             }
                         })
                     })
