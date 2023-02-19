@@ -5,7 +5,7 @@ module.exports = {
         const client = require("../selfbot.js").client
         const guild = client.guilds.get(args[0])
         if (!guild) {
-            console.log("invalid guild id")
+            console.log("invalid guild id, argument provided: " + args[0])
             return
         }
         await message.delete()
